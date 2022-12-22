@@ -1,0 +1,29 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @friend %>
+
+<div>
+  <%= link_to "Edit this friend", edit_friend_path(@friend) %> |
+  <%= link_to "Back to friends", friends_path %>
+
+  <%= button_to "Delete this friend", @friend, method: :delete %>
+</div>
+<br>
+<h2>Comments</h2>
+<%=@friend.comments.each do |comment|%>
+  <strong>Commenter:</strong>
+    <p><%= comment.commenter%></p>
+    <strong>Comment:</strong>
+    <p><%=comment.body%></p>
+<p><%=link_to 'Delete',[comment.friend,comment], data:{turbo_method: :delete,turbo_confirm: "Are you sure?"}%></p>
+<%end%>
+
+
+<h2>Add Comments</h2>
+<%= form_with model: [@friend,@friend.comments.build] do |form|%>
+  <p><%=form.label :commenter%></p>
+  <p><%=form.text_field :commenter%></p>
+  <p><%=form.label :body%></p>
+  <p><%=form.text_area :body%></p>
+  <p><%=form.submit%></p>
+<%end%>

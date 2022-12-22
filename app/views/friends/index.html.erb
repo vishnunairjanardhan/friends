@@ -1,0 +1,31 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Friends</h1>
+<table>
+  <thead>
+    <tr>
+        <th> <strong>First name:</strong></th>
+        <th> <strong>Last name:</strong></th>
+        <th><strong>Email:</strong></th>
+        <th><strong>Phone:</strong></th> 
+        <th><strong>Facebook:</strong></th>
+        <th>View:</th>
+        <th>Delete:</th>
+
+    </tr>
+  </thead>
+  <tbody>
+  <tr>
+     <% @friends.each do |friend| %>
+    <td><%= friend.first_name %></td>
+    <td> <%= friend.last_name %></td>
+    <td><%= friend.email %></td>
+    <td> <%= friend.phone %></td>
+    <td> <%= friend.facebook %></td>
+    <td><%=link_to "View",friend%></td>
+    <td><%=link_to "Delete",friend,data: {turbo_method: :delete,turbo_confirm: "are you sure?"}%></td>
+  </tr>
+  <% end %>
+  <tbody>
+</table>
+<%= link_to "New friend", new_friend_path %>
